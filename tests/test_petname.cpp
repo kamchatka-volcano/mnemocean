@@ -106,7 +106,7 @@ TEST(Petname, CustomLengthNumberTokenGenerator)
     auto randomNumberGenerator = std::mt19937{16};
     auto generator =
             mnemocean::petname_id_generator<std::mt19937>{randomNumberGenerator, mnemocean::number_token_generator<8>{}};
-    EXPECT_EQ(generator(), "namely-firm-swan-5568708");
+    EXPECT_EQ(generator(), "namely-firm-swan-5694624");
 }
 
 TEST(Petname, DefaultZeroPaddedNumberTokenGenerator)
@@ -124,7 +124,7 @@ TEST(Petname, CustomLengthZeroPaddedNumberTokenGenerator)
     auto generator = mnemocean::petname_id_generator<std::mt19937>{
             randomNumberGenerator,
             mnemocean::number_token_generator<8, mnemocean::number_string_format::zero_padded_decimal>{}};
-    EXPECT_EQ(generator(), "namely-firm-swan-05568708");
+    EXPECT_EQ(generator(), "namely-firm-swan-05694624");
 }
 
 TEST(Petname, DefaultNumberTokenGeneratorWithCustomDelimiter)
@@ -144,7 +144,7 @@ TEST(Petname, CustomLengthNumberTokenGeneratorWithCustomDelimiter)
             randomNumberGenerator,
             mnemocean::number_token_generator<8>{},
             ":"};
-    EXPECT_EQ(generator(), "namely:firm:swan:5568708");
+    EXPECT_EQ(generator(), "namely:firm:swan:5694624");
 }
 
 
@@ -166,7 +166,7 @@ TEST(Petname, CustomLengthZeroPaddedNumberTokenGeneratorWithCustomDelimiter)
             randomNumberGenerator,
             mnemocean::number_token_generator<8, mnemocean::number_string_format::zero_padded_decimal>{},
             ":"};
-    EXPECT_EQ(generator(), "namely:firm:swan:05568708");
+    EXPECT_EQ(generator(), "namely:firm:swan:05694624");
 }
 
 TEST(Petname, DefaultHexNumberTokenGenerator)

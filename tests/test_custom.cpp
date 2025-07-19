@@ -9,7 +9,7 @@ TEST(Custom, DefaultId)
 {
     auto randomNumberGenerator = std::mt19937{1};
     auto generator = mnemocean::mnemonic_id_generator<std::mt19937>{randomNumberGenerator, customDictionary};
-    EXPECT_EQ(generator(), "red-bar");
+    EXPECT_EQ(generator(), "blue-bar");
 }
 
 TEST(Custom, CustomDelimiter)
@@ -20,7 +20,7 @@ TEST(Custom, CustomDelimiter)
             customDictionary,
             mnemocean::empty_token_generator{},
             ":"};
-    EXPECT_EQ(generator(), "red:bar");
+    EXPECT_EQ(generator(), "blue:bar");
 }
 
 TEST(Custom, DefaultAlphabetTokenGenerator)
@@ -30,7 +30,7 @@ TEST(Custom, DefaultAlphabetTokenGenerator)
             randomNumberGenerator,
             customDictionary,
             mnemocean::alphabet_token_generator{}};
-    EXPECT_EQ(generator(), "red-bar-syadh");
+    EXPECT_EQ(generator(), "blue-bar-syadh");
 }
 
 TEST(Custom, CustomLengthAlphabetTokenGenerator)
@@ -40,7 +40,7 @@ TEST(Custom, CustomLengthAlphabetTokenGenerator)
             randomNumberGenerator,
             customDictionary,
             mnemocean::alphabet_token_generator<3>{}};
-    EXPECT_EQ(generator(), "red-bar-sya");
+    EXPECT_EQ(generator(), "blue-bar-sya");
 }
 
 TEST(Custom, DefaultAlphabetTokenGeneratorAndCustomDelimiter)
@@ -51,7 +51,7 @@ TEST(Custom, DefaultAlphabetTokenGeneratorAndCustomDelimiter)
             customDictionary,
             mnemocean::alphabet_token_generator{},
             ":"};
-    EXPECT_EQ(generator(), "red:bar:syadh");
+    EXPECT_EQ(generator(), "blue:bar:syadh");
 }
 
 TEST(Custom, CustomLengthAlphabetTokenGeneratorAndCustomDelimiter)
@@ -62,7 +62,7 @@ TEST(Custom, CustomLengthAlphabetTokenGeneratorAndCustomDelimiter)
             customDictionary,
             mnemocean::alphabet_token_generator<3>{},
             ":"};
-    EXPECT_EQ(generator(), "red:bar:sya");
+    EXPECT_EQ(generator(), "blue:bar:sya");
 }
 
 TEST(Custom, DefaultAlphanumericalTokenGenerator)
@@ -72,7 +72,7 @@ TEST(Custom, DefaultAlphanumericalTokenGenerator)
             randomNumberGenerator,
             customDictionary,
             mnemocean::alphanumeric_token_generator{}};
-    EXPECT_EQ(generator(), "red-bar-z8aek");
+    EXPECT_EQ(generator(), "blue-bar-z8aek");
 }
 
 TEST(Custom, CustomLengthAlphanumericalTokenGenerator)
@@ -82,7 +82,7 @@ TEST(Custom, CustomLengthAlphanumericalTokenGenerator)
             randomNumberGenerator,
             customDictionary,
             mnemocean::alphanumeric_token_generator<3>{}};
-    EXPECT_EQ(generator(), "red-bar-z8a");
+    EXPECT_EQ(generator(), "blue-bar-z8a");
 }
 
 TEST(Custom, DefaultAlphanumericalTokenGeneratorWithCustomDelimiter)
@@ -93,7 +93,7 @@ TEST(Custom, DefaultAlphanumericalTokenGeneratorWithCustomDelimiter)
             customDictionary,
             mnemocean::alphanumeric_token_generator{},
             ":"};
-    EXPECT_EQ(generator(), "red:bar:z8aek");
+    EXPECT_EQ(generator(), "blue:bar:z8aek");
 }
 
 TEST(Custom, CustomLengthAlphanumericalTokenGeneratorWithCustomDelimiter)
@@ -104,7 +104,7 @@ TEST(Custom, CustomLengthAlphanumericalTokenGeneratorWithCustomDelimiter)
             customDictionary,
             mnemocean::alphanumeric_token_generator<3>{},
             ":"};
-    EXPECT_EQ(generator(), "red:bar:z8a");
+    EXPECT_EQ(generator(), "blue:bar:z8a");
 }
 
 TEST(Custom, DefaultNumberTokenGenerator)
@@ -114,7 +114,7 @@ TEST(Custom, DefaultNumberTokenGenerator)
             randomNumberGenerator,
             customDictionary,
             mnemocean::number_token_generator{}};
-    EXPECT_EQ(generator(), "blue-bar-2592");
+    EXPECT_EQ(generator(), "red-bar-2592");
 }
 
 TEST(Custom, CustomLengthNumberTokenGenerator)
@@ -124,7 +124,7 @@ TEST(Custom, CustomLengthNumberTokenGenerator)
             randomNumberGenerator,
             customDictionary,
             mnemocean::number_token_generator<8>{}};
-    EXPECT_EQ(generator(), "blue-bar-2592622");
+    EXPECT_EQ(generator(), "red-bar-2651245");
 }
 
 TEST(Custom, DefaultZeroPaddedNumberTokenGenerator)
@@ -134,7 +134,7 @@ TEST(Custom, DefaultZeroPaddedNumberTokenGenerator)
             randomNumberGenerator,
             customDictionary,
             mnemocean::number_token_generator<5, mnemocean::number_string_format::zero_padded_decimal>{}};
-    EXPECT_EQ(generator(), "blue-bar-02592");
+    EXPECT_EQ(generator(), "red-bar-02592");
 }
 
 TEST(Custom, CustomLengthZeroPaddedNumberTokenGenerator)
@@ -144,7 +144,7 @@ TEST(Custom, CustomLengthZeroPaddedNumberTokenGenerator)
             randomNumberGenerator,
             customDictionary,
             mnemocean::number_token_generator<8, mnemocean::number_string_format::zero_padded_decimal>{}};
-    EXPECT_EQ(generator(), "blue-bar-02592622");
+    EXPECT_EQ(generator(), "red-bar-02651245");
 }
 
 TEST(Custom, DefaultNumberTokenGeneratorWithCustomDelimiter)
@@ -155,7 +155,7 @@ TEST(Custom, DefaultNumberTokenGeneratorWithCustomDelimiter)
             customDictionary,
             mnemocean::number_token_generator{},
             ":"};
-    EXPECT_EQ(generator(), "blue:bar:2592");
+    EXPECT_EQ(generator(), "red:bar:2592");
 }
 
 TEST(Custom, CustomLengthNumberTokenGeneratorWithCustomDelimiter)
@@ -166,7 +166,7 @@ TEST(Custom, CustomLengthNumberTokenGeneratorWithCustomDelimiter)
             customDictionary,
             mnemocean::number_token_generator<8>{},
             ":"};
-    EXPECT_EQ(generator(), "blue:bar:2592622");
+    EXPECT_EQ(generator(), "red:bar:2651245");
 }
 
 TEST(Custom, DefaultZeroPaddedNumberTokenGeneratorWithCustomDelimiter)
@@ -177,7 +177,7 @@ TEST(Custom, DefaultZeroPaddedNumberTokenGeneratorWithCustomDelimiter)
             customDictionary,
             mnemocean::number_token_generator<5, mnemocean::number_string_format::zero_padded_decimal>{},
             ":"};
-    EXPECT_EQ(generator(), "blue:bar:02592");
+    EXPECT_EQ(generator(), "red:bar:02592");
 }
 
 TEST(Custom, CustomLengthZeroPaddedNumberTokenGeneratorWithCustomDelimiter)
@@ -188,7 +188,7 @@ TEST(Custom, CustomLengthZeroPaddedNumberTokenGeneratorWithCustomDelimiter)
             customDictionary,
             mnemocean::number_token_generator<8, mnemocean::number_string_format::zero_padded_decimal>{},
             ":"};
-    EXPECT_EQ(generator(), "blue:bar:02592622");
+    EXPECT_EQ(generator(), "red:bar:02651245");
 }
 
 TEST(Custom, DefaultHexNumberTokenGenerator)
@@ -198,7 +198,7 @@ TEST(Custom, DefaultHexNumberTokenGenerator)
             randomNumberGenerator,
             customDictionary,
             mnemocean::number_token_generator<5, mnemocean::number_string_format::hexadecimal>{}};
-    EXPECT_EQ(generator(), "blue-bar-6a31");
+    EXPECT_EQ(generator(), "red-bar-6a31");
 }
 
 TEST(Custom, CustomLengthHexNumberTokenGenerator)
@@ -208,7 +208,7 @@ TEST(Custom, CustomLengthHexNumberTokenGenerator)
             randomNumberGenerator,
             customDictionary,
             mnemocean::number_token_generator<8, mnemocean::number_string_format::hexadecimal>{}};
-    EXPECT_EQ(generator(), "blue-bar-6a319ed");
+    EXPECT_EQ(generator(), "red-bar-6a319ed");
 }
 
 TEST(Custom, DefaultZeroPaddedHexNumberTokenGenerator)
@@ -218,7 +218,7 @@ TEST(Custom, DefaultZeroPaddedHexNumberTokenGenerator)
             randomNumberGenerator,
             customDictionary,
             mnemocean::number_token_generator<5, mnemocean::number_string_format::zero_padded_hexadecimal>{}};
-    EXPECT_EQ(generator(), "blue-bar-06a31");
+    EXPECT_EQ(generator(), "red-bar-06a31");
 }
 
 TEST(Custom, CustomLengthZeroPaddedHexNumberTokenGenerator)
@@ -228,7 +228,7 @@ TEST(Custom, CustomLengthZeroPaddedHexNumberTokenGenerator)
             randomNumberGenerator,
             customDictionary,
             mnemocean::number_token_generator<8, mnemocean::number_string_format::zero_padded_hexadecimal>{}};
-    EXPECT_EQ(generator(), "blue-bar-06a319ed");
+    EXPECT_EQ(generator(), "red-bar-06a319ed");
 }
 
 TEST(Custom, DefaultHexNumberTokenGeneratorWithCustomDelimiter)
@@ -239,7 +239,7 @@ TEST(Custom, DefaultHexNumberTokenGeneratorWithCustomDelimiter)
             customDictionary,
             mnemocean::number_token_generator<5, mnemocean::number_string_format::hexadecimal>{},
             ":"};
-    EXPECT_EQ(generator(), "blue:bar:6a31");
+    EXPECT_EQ(generator(), "red:bar:6a31");
 }
 
 TEST(Custom, CustomLengthHexNumberTokenGeneratorWithCustomDelimiter)
@@ -250,7 +250,7 @@ TEST(Custom, CustomLengthHexNumberTokenGeneratorWithCustomDelimiter)
             customDictionary,
             mnemocean::number_token_generator<8, mnemocean::number_string_format::hexadecimal>{},
             ":"};
-    EXPECT_EQ(generator(), "blue:bar:6a319ed");
+    EXPECT_EQ(generator(), "red:bar:6a319ed");
 }
 
 TEST(Custom, DefaultZeroPaddedHexNumberTokenGeneratorWithCustomDelimiter)
@@ -261,7 +261,7 @@ TEST(Custom, DefaultZeroPaddedHexNumberTokenGeneratorWithCustomDelimiter)
             customDictionary,
             mnemocean::number_token_generator<5, mnemocean::number_string_format::zero_padded_hexadecimal>{},
             ":"};
-    EXPECT_EQ(generator(), "blue:bar:06a31");
+    EXPECT_EQ(generator(), "red:bar:06a31");
 }
 
 TEST(Custom, CustomLengthZeroPaddedHexNumberTokenGeneratorWithCustomDelimiter)
@@ -272,5 +272,5 @@ TEST(Custom, CustomLengthZeroPaddedHexNumberTokenGeneratorWithCustomDelimiter)
             customDictionary,
             mnemocean::number_token_generator<8, mnemocean::number_string_format::zero_padded_hexadecimal>{},
             ":"};
-    EXPECT_EQ(generator(), "blue:bar:06a319ed");
+    EXPECT_EQ(generator(), "red:bar:06a319ed");
 }

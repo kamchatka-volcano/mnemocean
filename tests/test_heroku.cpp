@@ -102,7 +102,7 @@ TEST(Heroku, DefaultNumberTokenGenerator)
     auto generator =
             mnemocean::heroku_id_generator<std::mt19937>{randomNumberGenerator, mnemocean::number_token_generator{}};
     EXPECT_EQ(generator(), "dark-lab-2592");
-    EXPECT_EQ(generator(), "plain-water-94773");
+    EXPECT_EQ(generator(), "plain-water-94774");
 }
 
 TEST(Heroku, CustomLengthNumberTokenGenerator)
@@ -110,7 +110,7 @@ TEST(Heroku, CustomLengthNumberTokenGenerator)
     auto randomNumberGenerator = std::mt19937{2};
     auto generator =
             mnemocean::heroku_id_generator<std::mt19937>{randomNumberGenerator, mnemocean::number_token_generator<8>{}};
-    EXPECT_EQ(generator(), "dark-lab-2592622");
+    EXPECT_EQ(generator(), "dark-lab-2651245");
 }
 
 TEST(Heroku, DefaultZeroPaddedNumberTokenGenerator)
@@ -128,7 +128,7 @@ TEST(Heroku, CustomLengthZeroPaddedNumberTokenGenerator)
     auto generator = mnemocean::heroku_id_generator<std::mt19937>{
             randomNumberGenerator,
             mnemocean::number_token_generator<8, mnemocean::number_string_format::zero_padded_decimal>{}};
-    EXPECT_EQ(generator(), "dark-lab-02592622");
+    EXPECT_EQ(generator(), "dark-lab-02651245");
 }
 
 TEST(Heroku, DefaultNumberTokenGeneratorWithCustomDelimiter)
@@ -148,7 +148,7 @@ TEST(Heroku, CustomLengthNumberTokenGeneratorWithCustomDelimiter)
             randomNumberGenerator,
             mnemocean::number_token_generator<8>{},
             ":"};
-    EXPECT_EQ(generator(), "dark:lab:2592622");
+    EXPECT_EQ(generator(), "dark:lab:2651245");
 }
 
 
@@ -170,7 +170,7 @@ TEST(Heroku, CustomLengthZeroPaddedNumberTokenGeneratorWithCustomDelimiter)
             randomNumberGenerator,
             mnemocean::number_token_generator<8, mnemocean::number_string_format::zero_padded_decimal>{},
             ":"};
-    EXPECT_EQ(generator(), "dark:lab:02592622");
+    EXPECT_EQ(generator(), "dark:lab:02651245");
 }
 
 TEST(Heroku, DefaultHexNumberTokenGenerator)

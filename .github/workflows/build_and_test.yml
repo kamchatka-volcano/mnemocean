@@ -26,17 +26,20 @@ jobs:
           - {
             name: "Ubuntu Latest gcc",
             os: ubuntu-latest,
-            cmake-preset: "gcc-release"
+            cmake-preset: "gcc-release",
+            cmake-vars: "-DCMAKE_TOOLCHAIN_FILE=vcpkg/scripts/buildsystems/vcpkg.cmake"
           }
           - {
             name: "Ubuntu Latest clang",
             os: ubuntu-latest,
-            cmake-preset: "clang-release"
+            cmake-preset: "clang-release",
+            cmake-vars: "-DCMAKE_TOOLCHAIN_FILE=vcpkg/scripts/buildsystems/vcpkg.cmake"
           }
           - {
             name: "Windows Latest MSVC",
             os: windows-latest,
-            cmake-preset: "msvc-release"
+            cmake-preset: "msvc-release",
+            cmake-vars: "-DVCPKG_TARGET_TRIPLET=x64-windows-static-md -DCMAKE_TOOLCHAIN_FILE='vcpkg/scripts/buildsystems/vcpkg.cmake'"
           }
 
     steps:
@@ -49,10 +52,16 @@ jobs:
     - uses: actions/checkout@v4
 
     - uses: rui314/setup-mold@v1
+
+    - name: Install vcpkg
+      uses: lukka/run-vcpkg@v10
+      with:
+        vcpkgGitCommitId: caa7579a1c48e2ca770f6ccf98cb03db95642631
+
     - uses: hendrikmuhs/ccache-action@v1.2
     - uses: ilammy/msvc-dev-cmd@v1
     - name: Configure CMake
-      run: cmake -B ${{github.workspace}}/build -DENABLE_TESTS=ON --preset="${{ matrix.config.cmake-preset }}"
+      run: cmake -B ${{github.workspace}}/build -DENABLE_TESTS=ON -DMNEMOCEAN_USE_BOOST_RANDOM=ON ${{ matrix.config.cmake-vars }} --preset="${{ matrix.config.cmake-preset }}"
 
     - name: Build
       run: cmake --build ${{github.workspace}}/build

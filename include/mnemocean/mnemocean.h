@@ -3,16 +3,25 @@
 #include "detail/external/eel/functional.h"
 #include "detail/external/eel/string_utils.h"
 
+#ifdef MNEMOCEAN_USE_BOOST_RANDOM
+#include <boost/random/uniform_int_distribution.hpp>
+#endif
+
 #include <iomanip>
 #include <random>
 #include <sstream>
 #include <string>
 #include <string_view>
-#include <unordered_set>
 #include <variant>
 #include <vector>
 
 namespace mnemocean {
+
+#ifdef MNEMOCEAN_USE_BOOST_RANDOM
+namespace random = boost::random;
+#else
+namespace random = std;
+#endif
 
 struct dictionary_preset {
     std::vector<std::string_view> nouns;
@@ -225,14 +234,9 @@ public:
     {
     }
 
-    dictionary(
-            std::unordered_set<std::string> nouns,
-            std::unordered_set<std::string> adjectives,
-            std::unordered_set<std::string> adverbs)
-        : data_{
-                  data{std::vector<std::string>{nouns.begin(), nouns.end()},
-                       std::vector<std::string>{adjectives.begin(), adjectives.end()},
-                       std::vector<std::string>{adverbs.begin(), adverbs.end()}}}
+    dictionary(std::vector<std::string> nouns, std::vector<std::string> adjectives, std::vector<std::string> adverbs)
+        : data_{data{std::move(nouns), std::move(adjectives), std::move(adverbs)}}
+
     {
     }
 
@@ -321,7 +325,7 @@ struct alphabet_token_generator {
         token.reserve(tokenLength);
         for (int i = 0; i < tokenLength; ++i) {
             const auto randomLetterIndex =
-                    std::uniform_int_distribution{0, static_cast<int>(letters.size() - 1)}(randomNumberGenerator);
+                    random::uniform_int_distribution{0, static_cast<int>(letters.size() - 1)}(randomNumberGenerator);
             token += letters.at(randomLetterIndex);
         }
         return token;
@@ -338,7 +342,7 @@ struct alphanumeric_token_generator {
         token.reserve(tokenLength);
         for (int i = 0; i < tokenLength; ++i) {
             const auto randomLetterIndex =
-                    std::uniform_int_distribution{0, static_cast<int>(letters.size() - 1)}(randomNumberGenerator);
+                    random::uniform_int_distribution{0, static_cast<int>(letters.size() - 1)}(randomNumberGenerator);
             token += letters.at(randomLetterIndex);
         }
         return token;
@@ -362,7 +366,7 @@ struct number_token_generator {
                 ? 16
                 : 10;
         const auto max_value = std::pow(base, tokenLength) - 1;
-        const auto value = std::uniform_int_distribution<unsigned long long>(
+        const auto value = random::uniform_int_distribution<unsigned long long>(
                 0,
                 static_cast<unsigned long long>(max_value))(randomNumberGenerator);
 
@@ -423,7 +427,7 @@ public:
                 return {};
 
             const auto randomNounIndex =
-                    std::uniform_int_distribution{0, dictionary_.noun_count() - 1}(randomNumberGenerator_.get());
+                    random::uniform_int_distribution{0, dictionary_.noun_count() - 1}(randomNumberGenerator_.get());
             return dictionary_.noun(randomNounIndex);
         }();
         const auto randomAdjective = [&]() -> std::string_view
@@ -431,8 +435,8 @@ public:
             if (dictionary_.adjective_count() == 0)
                 return {};
 
-            const auto randomAdjectiveIndex =
-                    std::uniform_int_distribution{0, dictionary_.adjective_count() - 1}(randomNumberGenerator_.get());
+            const auto randomAdjectiveIndex = random::uniform_int_distribution{0, dictionary_.adjective_count() - 1}(
+                    randomNumberGenerator_.get());
             return dictionary_.adjective(randomAdjectiveIndex);
         }();
 
@@ -442,7 +446,7 @@ public:
                 return {};
 
             const auto randomAdverbIndex =
-                    std::uniform_int_distribution{0, dictionary_.adverb_count() - 1}(randomNumberGenerator_.get());
+                    random::uniform_int_distribution{0, dictionary_.adverb_count() - 1}(randomNumberGenerator_.get());
             return dictionary_.adverb(randomAdverbIndex);
         }();
 
