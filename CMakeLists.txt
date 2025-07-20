@@ -20,8 +20,6 @@ SealLake_V040_Bundle(
 
 SealLake_v040_HeaderOnlyLibrary(
         COMPILE_FEATURES cxx_std_17
-        PROPERTIES
-            CXX_EXTENSIONS OFF
 )
 
 if (MNEMOCEAN_USE_BOOST_RANDOM)
