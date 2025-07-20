@@ -221,6 +221,13 @@ struct petname_dictionary : dictionary_preset {
     }
 };
 
+struct petname_dictionary_short : petname_dictionary {
+    petname_dictionary_short()
+    {
+        adverbs.clear();
+    }
+};
+
 class dictionary {
     struct data {
         std::vector<std::string> nouns;
@@ -234,7 +241,10 @@ public:
     {
     }
 
-    dictionary(std::vector<std::string> nouns, std::vector<std::string> adjectives, std::vector<std::string> adverbs)
+    dictionary(
+            std::vector<std::string> nouns,
+            std::vector<std::string> adjectives = {},
+            std::vector<std::string> adverbs = {})
         : data_{data{std::move(nouns), std::move(adjectives), std::move(adverbs)}}
 
     {
@@ -471,9 +481,16 @@ private:
 template<typename UniformRandomNumberGenerator>
 using heroku_id_generator = mnemonic_id_generator<UniformRandomNumberGenerator, heroku_dictionary>;
 
+enum class petname_format {
+    short_name,
+    long_name
+};
+
 //Dictionary is from https://github.com/dustinkirkland/python-petname
-template<typename UniformRandomNumberGenerator>
-using petname_id_generator = mnemonic_id_generator<UniformRandomNumberGenerator, petname_dictionary>;
+template<typename UniformRandomNumberGenerator, petname_format format = petname_format::short_name>
+using petname_id_generator = mnemonic_id_generator<
+        UniformRandomNumberGenerator,
+        std::conditional_t<format == petname_format::long_name, petname_dictionary, petname_dictionary_short>>;
 
 } //namespace mnemocean
 
