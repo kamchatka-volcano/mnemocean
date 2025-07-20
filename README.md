@@ -167,7 +167,6 @@ results from the same seed across different compilers or even different versions
 If you need to ensure that the generated identifiers are consistent across different platforms, the implementation can
 be switched to use boost's random number generator by enabling `MNEMOCEAN_USE_BOOST_RANDOM` CMake option.
 
-```cpp
 
 ### Installation
 
