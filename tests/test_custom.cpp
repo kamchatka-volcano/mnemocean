@@ -29,7 +29,7 @@ TEST(Custom, DefaultAlphabetTokenGenerator)
     auto generator = mnemocean::mnemonic_id_generator<std::mt19937>{
             randomNumberGenerator,
             customDictionary,
-            mnemocean::alphabet_token_generator{}};
+            mnemocean::alphabetic_token_generator{}};
     EXPECT_EQ(generator(), "blue-bar-syadh");
 }
 
@@ -39,7 +39,7 @@ TEST(Custom, CustomLengthAlphabetTokenGenerator)
     auto generator = mnemocean::mnemonic_id_generator<std::mt19937>{
             randomNumberGenerator,
             customDictionary,
-            mnemocean::alphabet_token_generator<3>{}};
+            mnemocean::alphabetic_token_generator<3>{}};
     EXPECT_EQ(generator(), "blue-bar-sya");
 }
 
@@ -49,7 +49,7 @@ TEST(Custom, DefaultAlphabetTokenGeneratorAndCustomDelimiter)
     auto generator = mnemocean::mnemonic_id_generator<std::mt19937>{
             randomNumberGenerator,
             customDictionary,
-            mnemocean::alphabet_token_generator{},
+            mnemocean::alphabetic_token_generator{},
             ":"};
     EXPECT_EQ(generator(), "blue:bar:syadh");
 }
@@ -60,7 +60,7 @@ TEST(Custom, CustomLengthAlphabetTokenGeneratorAndCustomDelimiter)
     auto generator = mnemocean::mnemonic_id_generator<std::mt19937>{
             randomNumberGenerator,
             customDictionary,
-            mnemocean::alphabet_token_generator<3>{},
+            mnemocean::alphabetic_token_generator<3>{},
             ":"};
     EXPECT_EQ(generator(), "blue:bar:sya");
 }

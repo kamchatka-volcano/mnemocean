@@ -326,7 +326,7 @@ struct empty_token_generator {
 };
 
 template<int tokenLength = 5>
-struct alphabet_token_generator {
+struct alphabetic_token_generator {
     template<typename RandomNumberGenerator>
     std::string operator()(std::string_view, RandomNumberGenerator& randomNumberGenerator) const
     {

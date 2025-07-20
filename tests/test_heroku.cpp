@@ -22,8 +22,9 @@ TEST(Heroku, CustomDelimiter)
 TEST(Heroku, DefaultAlphabetTokenGenerator)
 {
     auto randomNumberGenerator = std::mt19937{1};
-    auto generator =
-            mnemocean::heroku_id_generator<std::mt19937>{randomNumberGenerator, mnemocean::alphabet_token_generator{}};
+    auto generator = mnemocean::heroku_id_generator<std::mt19937>{
+            randomNumberGenerator,
+            mnemocean::alphabetic_token_generator{}};
     EXPECT_EQ(generator(), "young-hill-syadh");
     EXPECT_EQ(generator(), "crimson-wood-gckek");
 }
@@ -33,7 +34,7 @@ TEST(Heroku, CustomLengthAlphabetTokenGenerator)
     auto randomNumberGenerator = std::mt19937{1};
     auto generator = mnemocean::heroku_id_generator<std::mt19937>{
             randomNumberGenerator,
-            mnemocean::alphabet_token_generator<3>{}};
+            mnemocean::alphabetic_token_generator<3>{}};
     EXPECT_EQ(generator(), "young-hill-sya");
 }
 
@@ -42,7 +43,7 @@ TEST(Heroku, DefaultAlphabetTokenGeneratorAndCustomDelimiter)
     auto randomNumberGenerator = std::mt19937{1};
     auto generator = mnemocean::heroku_id_generator<std::mt19937>{
             randomNumberGenerator,
-            mnemocean::alphabet_token_generator{},
+            mnemocean::alphabetic_token_generator{},
             ":"};
     EXPECT_EQ(generator(), "young:hill:syadh");
 }
@@ -52,7 +53,7 @@ TEST(Heroku, CustomLengthAlphabetTokenGeneratorAndCustomDelimiter)
     auto randomNumberGenerator = std::mt19937{1};
     auto generator = mnemocean::heroku_id_generator<std::mt19937>{
             randomNumberGenerator,
-            mnemocean::alphabet_token_generator<3>{},
+            mnemocean::alphabetic_token_generator<3>{},
             ":"};
     EXPECT_EQ(generator(), "young:hill:sya");
 }

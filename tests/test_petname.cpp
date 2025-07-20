@@ -32,7 +32,7 @@ TEST(Petname, DefaultAlphabetTokenGenerator)
     auto randomNumberGenerator = std::mt19937{1};
     auto generator = mnemocean::petname_id_generator<std::mt19937, mnemocean::petname_format::long_name>{
             randomNumberGenerator,
-            mnemocean::alphabet_token_generator{}};
+            mnemocean::alphabetic_token_generator{}};
     EXPECT_EQ(generator(), "recently-working-alpaca-yadhz");
 }
 
@@ -41,7 +41,7 @@ TEST(Petname, CustomLengthAlphabetTokenGenerator)
     auto randomNumberGenerator = std::mt19937{1};
     auto generator = mnemocean::petname_id_generator<std::mt19937, mnemocean::petname_format::long_name>{
             randomNumberGenerator,
-            mnemocean::alphabet_token_generator<3>{}};
+            mnemocean::alphabetic_token_generator<3>{}};
     EXPECT_EQ(generator(), "recently-working-alpaca-yad");
 }
 
@@ -50,7 +50,7 @@ TEST(Petname, DefaultAlphabetTokenGeneratorAndCustomDelimiter)
     auto randomNumberGenerator = std::mt19937{1};
     auto generator = mnemocean::petname_id_generator<std::mt19937, mnemocean::petname_format::long_name>{
             randomNumberGenerator,
-            mnemocean::alphabet_token_generator{},
+            mnemocean::alphabetic_token_generator{},
             ":"};
     EXPECT_EQ(generator(), "recently:working:alpaca:yadhz");
 }
@@ -60,7 +60,7 @@ TEST(Petname, CustomLengthAlphabetTokenGeneratorAndCustomDelimiter)
     auto randomNumberGenerator = std::mt19937{1};
     auto generator = mnemocean::petname_id_generator<std::mt19937, mnemocean::petname_format::long_name>{
             randomNumberGenerator,
-            mnemocean::alphabet_token_generator<3>{},
+            mnemocean::alphabetic_token_generator<3>{},
             ":"};
     EXPECT_EQ(generator(), "recently:working:alpaca:yad");
 }
