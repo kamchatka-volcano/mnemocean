@@ -162,6 +162,13 @@ std::cout << generator(); //=> "green-foo-1";
 std::cout << generator(); //=> "green-foo-2";
 ```
 
+Note that the `mnemocean` uses `std::uniform_int_distribution` internally, which is not guaranteed to produce the same
+results from the same seed across different compilers or even different versions of the same compiler.
+If you need to ensure that the generated identifiers are consistent across different platforms, the implementation can
+be switched to use boost's random number generator by enabling `MNEMOCEAN_USE_BOOST_RANDOM` CMake option.
+
+```cpp
+
 ### Installation
 
 Download and link the library from your project's CMakeLists.txt:
